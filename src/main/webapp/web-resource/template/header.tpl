@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse  row" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index.html">RocketMQ-Console</a>
+            <a class="navbar-brand" href="/index.html">RocketMQ</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

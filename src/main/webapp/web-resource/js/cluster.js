@@ -11,11 +11,9 @@
             method: "GET",
             url: "/cluster/list.query"
         }).success(function (resp) {
-            if (resp.status == 0) {
-                $scope.clusterMap = resp.data.clusterInfo.clusterAddrTable;
-                $scope.brokerMap = resp.data.clusterInfo.brokerAddrTable;
-                $scope.brokerDetail = resp.data.brokerServer;
-            }
+                $scope.clusterMap = resp.clusterInfo.clusterAddrTable;
+                $scope.brokerMap = resp.clusterInfo.brokerAddrTable;
+                $scope.brokerDetail = resp.brokerServer;
         })
 
         $scope.showDetail = function (brokerDetail,brokerName,index) {

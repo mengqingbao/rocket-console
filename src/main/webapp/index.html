@@ -41,7 +41,7 @@
 <div class="navbar navbar-inverse  row" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index.html">RocketMQ-Console</a>
+            <a class="navbar-brand" href="/index.html">RocketMQ</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -55,10 +55,48 @@
     </div>
 </div>
 <div class="container theme-showcase" role="main">
+<header>
+          <h1 class="page__title" itemprop="headline">RocketMQ Quick Start
+</h1>
+ </header>
+<h1 id="download--build-from-release">Download &amp; Build from Release</h1>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">&gt;</span> unzip rocketmq-all-4.4.0-source-release.zip
+  <span class="o">&gt;</span> <span class="nb">cd </span>rocketmq-all-4.4.0/
+  <span class="o">&gt;</span> mvn <span class="nt">-Prelease-all</span> <span class="nt">-DskipTests</span> clean <span class="nb">install</span> <span class="nt">-U</span>
+  <span class="o">&gt;</span> <span class="nb">cd </span>distribution/target/apache-rocketmq
+</code></pre></div></div>
+<h1 id="start-name-server">Start Name Server</h1>
 
-    <span>
-        I am content
-    </span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">&gt;</span> <span class="nb">nohup </span>sh bin/mqnamesrv &amp;
+  <span class="o">&gt;</span> <span class="nb">tail</span> <span class="nt">-f</span> ~/logs/rocketmqlogs/namesrv.log
+  The Name Server boot success...
+</code></pre></div></div>
+<h1 id="start-broker">Start Broker</h1>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">&gt;</span> <span class="nb">nohup </span>sh bin/mqbroker <span class="nt">-n</span> localhost:9876 &amp;
+  <span class="o">&gt;</span> <span class="nb">tail</span> <span class="nt">-f</span> ~/logs/rocketmqlogs/broker.log 
+  The broker[%s, 172.30.30.233:10911] boot success...
+</code></pre></div></div>
+
+<h1 id="send--receive-messages">Send &amp; Receive Messages</h1>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&gt;</span> <span class="nb">export </span><span class="nv">NAMESRV_ADDR</span><span class="o">=</span>localhost:9876
+ <span class="o">&gt;</span> sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer
+ SendResult <span class="o">[</span><span class="nv">sendStatus</span><span class="o">=</span>SEND_OK, <span class="nv">msgId</span><span class="o">=</span> ...
+
+ <span class="o">&gt;</span> sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer
+ ConsumeMessageThread_%d Receive New Messages: <span class="o">[</span>MessageExt...
+</code></pre></div></div>
+<h1 id="shutdown-servers">Shutdown Servers</h1>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> sh bin/mqshutdown broker
+The mqbroker<span class="o">(</span>36695<span class="o">)</span> is running...
+Send shutdown request to mqbroker<span class="o">(</span>36695<span class="o">)</span> OK
+
+<span class="o">&gt;</span> sh bin/mqshutdown namesrv
+The mqnamesrv<span class="o">(</span>36664<span class="o">)</span> is running...
+Send shutdown request to mqnamesrv<span class="o">(</span>36664<span class="o">)</span> OK
+</code></pre></div></div>
 </div>
 </body>
 </html>

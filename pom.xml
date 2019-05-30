@@ -327,6 +327,7 @@
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
+                  	<webDefaultXml>src/test/resources/webdefault.xml</webDefaultXml>
                 </configuration>
             </plugin>
         </plugins>

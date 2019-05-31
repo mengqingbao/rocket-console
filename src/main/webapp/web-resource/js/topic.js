@@ -38,15 +38,13 @@
         }).success(function (resp) {
             if(resp.status ==0){
                 $scope.allTopicList = resp.data.topicList.sort();
-                console.log($scope.allTopicList);
-                console.log(JSON.stringify(resp));
                 $scope.showTopicList(1,$scope.allTopicList.length);
             }else {
                 Notification.error({message: resp.errMsg, delay: 5000});
             }
 
         });
-        $http({
+        /*$http({
             method: "GET",
             url: "/management//teamUrl.query"
         }).success(function (resp) {
@@ -64,7 +62,7 @@
                 })
             }
 
-        });
+        });*/
         $scope.filterStr="";
         $scope.$watch('filterStr', function() {
             $scope.filterList(1);
@@ -73,7 +71,6 @@
             var lowExceptStr =  $scope.filterStr.toLowerCase();
             var canShowList = [];
             $scope.allTopicList.forEach(function(element) {
-                console.log(element)
                 if (element.toLowerCase().indexOf(lowExceptStr) != -1){
                     canShowList.push(element);
                 }
@@ -93,13 +90,8 @@
             var perPage = $scope.paginationConf.itemsPerPage;
             var from = (currentPage - 1) * perPage;
             var to = (from + perPage)>totalItem?totalItem:from + perPage;
-            console.log($scope.allTopicList);
-            console.log(from)
-            console.log(to)
             $scope.topicShowList = $scope.allTopicList.slice(from, to);
             $scope.paginationConf.totalItems = totalItem ;
-            console.log($scope.topicShowList)
-            console.log($scope.paginationConf.totalItems)
         };
         $scope.deleteTopic= function (topic) {
             var url = "/topic/deleteTopic.do";
@@ -124,7 +116,6 @@
                 params: {topic: topic}
             }).success(function (resp) {
                 if (resp.status == 0) {
-                    console.log(JSON.stringify(resp));
                     ngDialog.open({
                         template: 'statsViewDialog',
                         data:{
@@ -144,7 +135,6 @@
                 params: {topic: topic}
             }).success(function (resp) {
                 if (resp.status == 0) {
-                    console.log(JSON.stringify(resp));
                     ngDialog.open({
                         template: 'routerViewDialog',
                         controller: 'routerViewDialogController',
@@ -167,7 +157,6 @@
                 params: {topic: topic}
             }).success(function (resp) {
                 if (resp.status == 0) {
-                    console.log(JSON.stringify(resp));
                     ngDialog.open({
                         template: 'consumerViewDialog',
                         data:{
@@ -268,7 +257,6 @@
                 url: "/cluster/list.query"
             }).success(function (resp) {
                 if(resp.status ==0){
-                    console.log(resp);
                     ngDialog.open({
                         template: 'topicModifyDialog',
                         controller: 'topicModifyDialogController',
@@ -290,9 +278,7 @@
 
     module.controller('topicModifyDialogController', function ($scope, ngDialog, $http,Notification) {
         $scope.postTopicRequest = function (topicRequestItem) {
-            console.log(topicRequestItem);
             var request = JSON.parse(JSON.stringify(topicRequestItem));
-            console.log(request);
             $http({
                 method: "POST",
                 url: "/topic/createOrUpdate.do",
@@ -312,9 +298,6 @@
             $scope.timepicker.date = moment().format('YYYY-MM-DD HH:mm');
             $scope.timepicker.options = {format: 'YYYY-MM-DD HH:mm', showClear: true};
             $scope.resetOffset = function () {
-                console.log($scope.timepicker.date);
-                console.log($scope.timepicker.date.valueOf());
-                console.log($scope.ngDialogData.selectedConsumerGroup);
                 $http({
                     method: "POST",
                     url: "/consumer/resetOffset.do",

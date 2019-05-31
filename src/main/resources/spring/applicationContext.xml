@@ -18,5 +18,5 @@
     <bean id="configureInitializer" class="com.didapinche.config.ConfigureInitializer" init-method="init">
         <property name="nameSrvAddr" value="${rocketmq.namesrv.addr}" />
     </bean>
-
+	<import resource="classpath:spring/spring-security.xml"/>
 </beans>

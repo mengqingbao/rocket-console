@@ -11,6 +11,7 @@
                 <li><a href="/producer.html">Producer</a></li>
                 <li><a href="/message.html">Message</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
+           <a href="/sign_out" class="btn btn-primary" style="float:right;margin-top: 10px;">Signout</a>
+        </div>
     </div>
 </div>

@@ -35,7 +35,6 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
-
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -51,7 +50,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/logout</url-pattern>
+		<url-pattern>/sign_out</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
